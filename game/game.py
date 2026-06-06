@@ -2,14 +2,24 @@
 from game.settings import GAME_LEVELS
 from game.models import Player
 from game.models import Computer
+from game.exceptions import InvalidInputError
+from game.exceptions import InvalidRollError
 
 
 
 def start_game():
+    print("Game started")
+    try:
+        while True:
+            name = input("Enter your name: ")
+            if name == "":
+                raise InvalidInputError("The string cannot be empty!")
+            else:
+                break
+    except InvalidInputError as e:
+        print(e)
     while True:
-        print("Game started")
-        name = input("Enter your name: ")
-        round_choice = input("Select game level: \n1 - Short (5 rounds) \n2 - Medium (8 rounds) \n3 - Long (10 rounds) \nYour choice: ")
+        round_choice = input("Select game level: \n1 - Short (5 rounds) \n2 - Medium (8 rounds) \n3 - Long (10rounds) \nYour choice: ")
         if round_choice in GAME_LEVELS:
             rounds = GAME_LEVELS[round_choice]
             break
@@ -17,7 +27,6 @@ def start_game():
             print("Incorrect choice! Try again.")
     player = Player(name)
     computer = Computer()
-
     for i in range(1, rounds + 1):
         enter = input("Press Enter")
         if enter != "":

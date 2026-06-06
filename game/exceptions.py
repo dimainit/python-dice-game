@@ -1,4 +1,5 @@
-# Только свои ошибки:
+class InvalidInputError:
+    pass
 
-# InvalidInputError
-# InvalidRollError
+class InvalidRollError:
+    pass
