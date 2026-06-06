@@ -4,20 +4,18 @@ from game.models import Player
 from game.models import Computer
 from game.exceptions import InvalidInputError
 from game.exceptions import InvalidRollError
+from game.score import save_result
 
 
 
 def start_game():
     print("Game started")
-    try:
-        while True:
-            name = input("Enter your name: ")
-            if name == "":
-                raise InvalidInputError("The string cannot be empty!")
-            else:
-                break
-    except InvalidInputError as e:
-        print(e)
+    while True:
+        name = input("Enter your name: ")
+        if name:
+            break
+        else:
+            print("The string cannot be empty!")
     while True:
         round_choice = input("Select game level: \n1 - Short (5 rounds) \n2 - Medium (8 rounds) \n3 - Long (10rounds) \nYour choice: ")
         if round_choice in GAME_LEVELS:
@@ -45,8 +43,9 @@ def start_game():
                 player.score = player.score - difference
             result = f"Round {i}: \nYou rolled the dice: 🎲 {player_roll} \nThe computer rolled the dice: 🎲 {computer_roll} \nDifference: {difference} points"
             print(result)
+    save_result(name, rounds, player.score)
 
-                
+        
                 
 
             

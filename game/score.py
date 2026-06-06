@@ -1,6 +1,21 @@
-# Работа с файлом:
+import datetime as dtm
+import json
 
-# save_result()
-# get_results()
+def save_result(name, rounds, score):
+    data = dtm.datetime.now()
+    result = {
+        "Date": str(data),
+        "Name": name,
+        "Number of rounds": rounds,
+        "Final score": score
+    }
+    with open("results.json", "r", encoding="UTF-8") as file:
+        results = json.load(file)
+        results.append(result)
+    with open("results.json", "w", encoding="UTF-8") as file:
+        json.dump(results, file, indent=4)
+        
 
-# Только сохранить и прочитать результаты.
+
+
+# def get_results():
