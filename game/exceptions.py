@@ -1,5 +1,5 @@
-class InvalidInputError:
+class InvalidInputError(Exception):
     pass
 
-class InvalidRollError:
+class InvalidRollError(Exception):
     pass

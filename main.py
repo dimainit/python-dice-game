@@ -1,6 +1,5 @@
-# НЕ ЗАБУДЬ ЗА """"""
 from game.game import start_game
-
+from game.score import get_results
 
 def main():
     while True:
@@ -11,8 +10,7 @@ def main():
         if item == "1":
             start_game()
         elif item == "2":
-            print("Тут будет логика score.py")
-
+            get_results()
         elif item == "3":
             print("Bye!")
             break
