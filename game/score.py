@@ -1,28 +1,44 @@
 import datetime as dtm
 import json
 
-def save_result(name, rounds, score):
-    """Saves the final game result to results.json."""
-    data = dtm.datetime.now()
-    result = {
+
+class ScoreManager:
+    def create_result(self, name, rounds, score):
+        data = dtm.datetime.now()
+        result = {
         "Date": str(data),
         "Name": name,
         "Number of rounds": rounds,
         "Final score": score
-    }
-    with open("results.json", "r", encoding="UTF-8") as file:
-        results = json.load(file)
-        results.append(result)
-    with open("results.json", "w", encoding="UTF-8") as file:
-        json.dump(results, file, indent=4)
+        }
+        return result
 
-def get_results():
-    """Reads saved game results from results.json and prints them."""
-    with open("results.json", "r", encoding="UTF-8") as file:
-        results = json.load(file)
-        for i in results:
-           print(f"Date: {i['Date']}")
-           print(f"Name: {i['Name']}")
-           print(f"Number of rounds: {i['Number of rounds']}")
-           print(f"Final score: {i['Final score']}")
-           print("---------------------------------")
+
+    def read_results(self):
+        with open("results.json", "r", encoding="UTF-8") as file:
+            results = json.load(file)
+        return results
+
+    
+    def write_results(self, results):
+        with open("results.json", "w", encoding="UTF-8") as file:
+            json.dump(results, file, indent=4)
+
+
+    def save_result(self, name, rounds, score):
+        result = self.create_result(name, rounds, score)
+        results = self.read_results()
+        results.append(result)
+        self.write_results(results)
+    
+
+    def get_results(self):
+        results = self.read_results()
+        for res in results:
+            print(f"Date: {res['Date']}")
+            print(f"Name: {res['Name']}")
+            print(f"Number of rounds: {res['Number of rounds']}")
+            print(f"Final score: {res['Final score']}")
+            print("-"*32)
+
+

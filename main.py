@@ -1,5 +1,5 @@
-from game.game import start_game
-from game.score import get_results
+from game.game import DiceGame
+from game.score import ScoreManager
 
 def main():
     while True:
@@ -8,9 +8,11 @@ def main():
         print("3. Exit")
         item = input("Select an item: ")
         if item == "1":
-            start_game()
+            game = DiceGame()
+            game.start_game()
         elif item == "2":
-            get_results()
+            score_manager = ScoreManager()
+            score_manager.get_results()
         elif item == "3":
             print("Bye!")
             break
